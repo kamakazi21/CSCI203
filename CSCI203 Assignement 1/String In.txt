@@ -1,0 +1,21 @@
+
+This is a simple finite State Machine to handle input from a file and break it into words
+
+
+
+word: array [1..100] of char				// words will not be longer than 100 characters each
+int len=0						// the length of the current word
+bool inword=false					// keep track of the state - in a word or not
+input: char
+
+do 
+	get a character from the file into input
+	if input is a space 				//" ", tab, nl, isspace(char)
+		if inword				// this space is at the end of a word
+			process the current word	
+			len=0
+	else if input is a letter 			// we are starting or continuing a word
+		inword = true
+		word[++len] = lowercase(input)		// store the letter at the end of the (possibly empty) word
+while not eof
+if len > 0 process the last word 			// we may have a word if the file ended after an alpha character.
